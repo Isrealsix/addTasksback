@@ -12,7 +12,10 @@ function App() {
 		setIsLoading(true);
 		setError(null);
 		try {
-			const response = await fetch('https://swapi.dev/api/films');
+			// const response = await fetch('https://swapi.dev/api/films');
+			const response = await fetch(
+				'https://appseven-9144b-default-rtdb.firebaseio.com/movies.json'
+			);
 			if (!response.ok) {
 				throw new Error('Somethin went wrong (;');
 			}
@@ -26,11 +29,10 @@ function App() {
 				};
 			});
 			setMovies(transformedMovies);
-			setIsLoading(false);
 		} catch (error) {
 			setError(error.message);
-			setIsLoading(false);
 		}
+		setIsLoading(false);
 	}, []);
 
 	useEffect(() => {
